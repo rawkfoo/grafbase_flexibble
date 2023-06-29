@@ -113,7 +113,7 @@ export const getUserQuery = `
       avatarUrl
       description
       githubUrl
-      linkedInUrl
+      linkedinUrl
     }
   }
 `;
@@ -127,7 +127,7 @@ export const getProjectsOfUserQuery = `
       description
       avatarUrl
       githubUrl
-      linkedInUrl
+      linkedinUrl
       projects(last: $last) {
         edges {
           node {

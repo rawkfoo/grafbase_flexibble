@@ -20,14 +20,15 @@ export const authOptions: NextAuthOptions = {
       const encodedToken = jsonwebtoken.sign({
         ...token,
         iss: 'grafbase',
-        exp: Math.floor(Date.now() / 1000) + 60 * 60
-      }, secret)
+        exp: Math.floor(Date.now() / 1000) + 60 * 600
+      }, secret);
+
       return encodedToken;
     },
     decode: async ({ secret, token }) => {
-      const decodedToken = jsonwebtoken.verify(token!, secret) as JWT;
-      return decodedToken;
-    }
+      const decodedToken = jsonwebtoken.verify(token!, secret);
+      return decodedToken as JWT;
+    },
   },
   theme: {
     colorScheme: 'light',
@@ -44,8 +45,8 @@ export const authOptions: NextAuthOptions = {
           user:{
             ...session.user,
             ...data?.user
-          }
-        }
+          },
+        };
 
         return newSession;
 
@@ -62,13 +63,12 @@ export const authOptions: NextAuthOptions = {
           await createUser (
             user.name as string, 
             user.email as string, 
-            user.image as string
-            );
+            user.image as string)
           }
-          return true
+          return true;
 
       } catch (error:any) {
-        console.log(error);
+        console.log('Error checking if user exists: ', error.message);
         return false; 
         
       }
